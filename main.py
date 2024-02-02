@@ -102,20 +102,30 @@ with torch.no_grad():
         if y_val.argmax().item() == y_test[i]:
             correct += 1
 #print(f'Got {correct} correct')
-sepal_length = float(input("Sepal Length: "))
-sepal_width = float(input("Sepal Width: "))
-pedal_length = float(input("Pedal Length: "))
-pedal_width = float(input("Pedal Width: "))
-new_iris = torch.tensor([sepal_length, sepal_width, pedal_length, pedal_width])
-with torch.no_grad():
-    val = model(new_iris)
-    if int(val.argmax().item()) == 0:
-        x = "Setosa"
+while True:
+    print("Type X and then enter at any moment to exit")
+    sepal_length = input("Sepal Length: ")
+    if str(sepal_length).lower() == 'x':
+        break
+    sepal_width = input("Sepal Width: ")
+    if str(sepal_width).lower() == 'x':
+        break
+    pedal_length = input("Pedal Length: ")
+    if str(pedal_length).lower() == 'x':
+        break
+    pedal_width = input("Pedal Width: ")
+    if str(pedal_width).lower() == 'x':
+        break
+    new_iris = torch.tensor([float(sepal_length), float(sepal_width), float(pedal_length), float(pedal_width)])
+    with torch.no_grad():
+        val = model(new_iris)
+        if int(val.argmax().item()) == 0:
+            x = "Setosa"
 
-    if int(val.argmax().item()) == 1:
-        x = "Versicolor"
+        if int(val.argmax().item()) == 1:
+            x = "Versicolor"
 
-    if int(val.argmax().item()) == 2:
-        x = "Virginica"
+        if int(val.argmax().item()) == 2:
+            x = "Virginica"
 
-    print(f'This iris is a {x}')
+        print(f'This iris is a {x}')
